@@ -24,11 +24,55 @@
 // }
 
 // export default App;
+// import React, { Component } from 'react'
+// import './App.css';
+// export default class App extends Component {
+//   state = {
+//     testbody : "",
+//   }
+
+//   handleChange =(e)=>{
+//     this.setState({
+//       [e.target.name] : e.target.value,
+//     });
+//   }
+
+//   submitId = ()=>{
+//     const post ={
+//       test : this.state.testbody,
+//     };
+   
+//     fetch("http://localhost:3001/idplz", {
+//       method : "post", // 통신방법
+//       headers : {
+//         "content-type" : "application/json",
+//       },
+//       body : JSON.stringify(post),
+//     })
+//     .then((res)=>res.json())
+//     .then((json)=>{
+//       this.setState({
+//         testbody : json.text,
+//       });
+//     });
+//   };
+
+//   render() {
+//     return (
+//       <div>
+//         <input onChange={this.handleChange} name ="testbody"/>
+//         <button onClick = {this.submitId}>Submit</button>
+//         <h1>{this.state.testbody}</h1>
+//       </div>
+//     )
+//   }
+// }
+
 import React, { Component } from 'react'
 import './App.css';
 export default class App extends Component {
   state = {
-    testbody : "",
+    id : "",
   }
 
   handleChange =(e)=>{
@@ -39,7 +83,7 @@ export default class App extends Component {
 
   submitId = ()=>{
     const post ={
-      test : this.state.testbody,
+      plzid : this.state.id,
     };
    
     fetch("http://localhost:3001/idplz", {
@@ -48,21 +92,15 @@ export default class App extends Component {
         "content-type" : "application/json",
       },
       body : JSON.stringify(post),
-    })
-    .then((res)=>res.json())
-    .then((json)=>{
-      this.setState({
-        testbody : json.text,
-      });
     });
   };
 
   render() {
     return (
       <div>
-        <input onChange={this.handleChange} name ="testbody"/>
+        <input onChange={this.handleChange} name ="id"/>
         <button onClick = {this.submitId}>Submit</button>
-        <h1>{this.state.testbody}</h1>
+        <h1>{this.state.id}</h1>
       </div>
     )
   }
