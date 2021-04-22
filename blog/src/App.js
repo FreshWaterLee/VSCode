@@ -24,7 +24,7 @@ import React, { Component } from 'react'
 class App extends Component {
   
   state = {
-    data:[{name : "Zoo",path:"None",description : "설명"}], //이미지 데이터를 가져오기위해 사용
+    data:[{name : "Zoo",path:"None",description : "테스트1.테스트2.테스트3"}], //이미지 데이터를 가져오기위해 사용
     kind : "",
     place :0
   }
@@ -41,7 +41,6 @@ class App extends Component {
       });
     }
     else{
-      
       this.setState({
         place : this.state.place+1
       });
@@ -106,7 +105,7 @@ class App extends Component {
               </td>
             </tr>
             <tr>
-              <td colSpan = '3'><img src={this.state.data[this.state.place].path} width= "300px" height = "300px"/></td>
+              <td colSpan = '3'><img src={this.state.data[this.state.place].path} width= "480px" height = "300px"/></td>
             </tr>
             <tr>
               <td><button onClick ={this.beforeClick}>이전</button></td>
@@ -114,11 +113,11 @@ class App extends Component {
               <td align = 'right'><button onClick={this.nextClick}>다음</button></td>
             </tr>
             <tr>
-              <td colSpan = '3'>{this.state.data[this.state.place].description}</td>
+              <td align = 'left' colSpan = '3'> {this.state.data[this.state.place].description.split('.').map((line) => {
+            return <div>{line}</div>})}</td>
             </tr>
           </tbody>
         </table>
-        
       </div>
     )
   }
