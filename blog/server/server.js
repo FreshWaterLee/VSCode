@@ -18,26 +18,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res) =>{
-    res.send('혁이는 코딩 중!')
-})
-
-app.post("/idplz", (req,res)=>{
-    const test = req.body.test;
-    // console.log(req.body);
-    connection.query("INSERT INTO test(name) values (?)",[test],
+app.post("/callbody", (req,res)=>{
+    var info=[];
+    var kind = req.body.kind;
+    var sql = "SELECT name,path,description FROM image where kind = '"+kind+"'";
+    connection.query(sql,
     function(err,rows,fields){
         if(err){
-            console.log("실패");
-            // console.log(err);
+            console.log("불러오기 실패");
         }else{
-            console.log("성공");
-            // console.log(rows);
-        };
-    });
-
-    
-});
+            for(var i=0; i<rows.length; i++){
+                info.push(rows[i]);
+            }
+            console.log("불러오기 성공",info.length);
+            res.send(info);
+        }
+    })
+})
 
 app.listen(port, ()=>{
     console.log(`Connect at http://localhost:${port}`);

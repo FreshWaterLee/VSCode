@@ -1,43 +1,161 @@
 import React, { Component } from 'react'
-import './App.css';
-export default class App extends Component {
-  state = {
-    testbody : "",
-  }
+// import './App.css';
 
+// class show_info extends Component{
+//   render(){
+//   var result;
+//   result = alert("데이터를 불러왔다!!.")
+//   return(
+//       {result}
+//     )
+//   }
+// }
+// class basic_info extends Component{
+//   render(){
+//     return(
+//       <div>
+//         <h3>아직 탐방을 하지 않으셨습니다.</h3>
+//         <h3>노 탐방</h3>
+//       </div>
+//     )
+//   }
+// }
+
+class App extends Component {
+  
+  state = {
+    data:[{name : "Zoo",path:"None",description : "설명"}], //이미지 데이터를 가져오기위해 사용
+    kind : "",
+    place :0
+  }
   handleChange =(e)=>{
+    console.log(this.state.kind);
     this.setState({
-      [e.target.name] : e.target.value,
+      kind : e.target.value,
     });
   }
-
-  submitId = ()=>{
+  nextClick = ()=>{
+    if(this.state.place >=this.state.data.length-1){
+      this.setState({
+        place : 0
+      });
+    }
+    else{
+      
+      this.setState({
+        place : this.state.place+1
+      });
+    }
+  }
+  beforeClick = ()=>{
+    if(this.state.place ===0){
+      this.setState({
+        place : this.state.data.length-1
+      });
+    }
+    else{
+      this.setState({
+        place : this.state.place-1
+      });
+    }
+  }
+  onCall =()=>{
+    if(this.state.kind === ""){
+        alert("종류를 입력해주세요!!");
+    }
+    else{
+    this.state.place = 0;
     const post ={
-      test : this.state.testbody,
+      kind : this.state.kind,
     };
-   
-    fetch("http://localhost:3001/idplz", {
-      method : "post", // 통신방법
+    fetch("http://localhost:3001/callbody",{
+      method:"post",
       headers : {
         "content-type" : "application/json",
       },
-      body : JSON.stringify(post),
+      body : JSON.stringify(post), // 전송할 데이터를 입력할곳
     })
     .then((res)=>res.json())
     .then((json)=>{
+      alert(json.name);
       this.setState({
-        testbody : json.text,
+        data: json,
+        // json이 key, value로 구성되어있기 때문에 key값을 data에 입력해야한다.
       });
     });
-  };
-
+  }}
   render() {
+    var place = 0;
     return (
       <div>
-        <input onChange={this.handleChange} name ="testbody"/>
-        <button onClick = {this.submitId}>Submit</button>
-        <h1>{this.state.testbody}</h1>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <select onChange={this.handleChange} name ="testbody">
+                <option value = "">선택안함</option>
+                <option value = "Animal">동물</option>
+                <option value = "Bird">새</option>
+                <option value = "Poke">포켓몬</option>
+                <option value = "Sea">해양생물</option>
+                </select>
+              </td>
+              <td>{this.state.data[this.state.place].name}</td>
+              <td align = 'right'>
+                <button onClick={this.onCall}>가져오기</button>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan = '3'><img src={this.state.data[this.state.place].path} width= "300px" height = "300px"/></td>
+            </tr>
+            <tr>
+              <td><button onClick ={this.beforeClick}>이전</button></td>
+              <td>설명 란</td>
+              <td align = 'right'><button onClick={this.nextClick}>다음</button></td>
+            </tr>
+            <tr>
+              <td colSpan = '3'>{this.state.data[this.state.place].description}</td>
+            </tr>
+          </tbody>
+        </table>
+        
       </div>
     )
   }
 }
+
+export default App;
+
+
+// import React, { Component } from 'react';
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// import { Home, About, User } from './pages'; // 생성한 페이지 정보를 가져올때 사용
+
+// class App extends Component {
+//   render() {
+//     return (
+//       <Router>
+//         <div>
+//           <nav>
+//             <ul>
+//               <li>
+//                 <Link to="/">Home</Link>
+//               </li>
+//               <li>
+//                 <Link to="/about">About</Link>
+//               </li>
+//               <li>
+//                 <Link to="/user">User</Link>
+//               </li>
+//             </ul>
+//           </nav>
+//           <Route exact path='/' component={Home}/> 
+//           {/* component란 페이지를 뜻한다? component ={페이지}를 하면 주소뒤에 입력한 값에 따른 페이지 지정이 가능하다(?). */}
+//           <Route path='/about' component={About}/>
+//           <Route path='/user/:name' component={User}/>
+//         </div>
+//       </Router>
+//     );
+//   }
+// }
+// export default App;
