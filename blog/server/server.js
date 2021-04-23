@@ -35,7 +35,24 @@ app.post("/callbody", (req,res)=>{
         }
     })
 })
-
+app.post("/Login",(req,res)=>{
+    // var id = req.body.id;
+    // var pw = req.body.pw;
+    // var sql = "select name from admin where id='"+id+"' and pw='"+pw+"'";
+    var sql = "select name from admin where id='test' and pw='test'";
+    connection.query(sql,function(err,rows,fields){
+        if(err){
+            console.log("db 접속 실패!!");
+        }else{
+            if(rows.length<1){
+                res.send("None");
+            }else{
+                var name = rows[0];
+                res.send(name);
+            }
+        }
+    })
+})
 app.listen(port, ()=>{
     console.log(`Connect at http://localhost:${port}`);
 })

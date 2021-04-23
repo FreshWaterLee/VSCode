@@ -1,11 +1,10 @@
 import React from 'react';
 
-const User = ({match}) => {
+function User(props){
     return(
         <div>
-            <h2>Hello! {match.params.name}</h2>
+            안녕하세요 {props.name}
         </div>
     )
 }
-
 export default User;

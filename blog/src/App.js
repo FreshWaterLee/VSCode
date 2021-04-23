@@ -1,32 +1,13 @@
 import React, { Component } from 'react'
-// import './App.css';
-
-// class show_info extends Component{
-//   render(){
-//   var result;
-//   result = alert("데이터를 불러왔다!!.")
-//   return(
-//       {result}
-//     )
-//   }
-// }
-// class basic_info extends Component{
-//   render(){
-//     return(
-//       <div>
-//         <h3>아직 탐방을 하지 않으셨습니다.</h3>
-//         <h3>노 탐방</h3>
-//       </div>
-//     )
-//   }
-// }
+import { Redirect } from 'react-router';
+import User from "./pages/User"
 
 class App extends Component {
-  
   state = {
-    data:[{name : "Zoo",path:"None",description : "테스트1.테스트2.테스트3"}], //이미지 데이터를 가져오기위해 사용
+    data:[{name : "Zoo",path:"None",description : "N.O.N.E"}], //이미지 데이터를 가져오기위해 사용
     kind : "",
-    place :0
+    place :0,
+    name :"",
   }
   handleChange =(e)=>{
     console.log(this.state.kind);
@@ -83,6 +64,30 @@ class App extends Component {
       });
     });
   }}
+  check_login=()=>{
+    var post = {id:this.state.id,pw:this.state.pw};
+    fetch("http://localhost:3001/Login",{
+        method:"post",
+        headers : {
+          "content-type" : "application/json",
+        },
+        body : JSON.stringify(post),
+    }).then((res)=>res.json())
+    .then((json)=>{
+        this.setState({
+            name: json,
+        })
+        var result = this.state.name.name;
+        if(result !== "None"){
+          return(
+            <Redirect to="/User?name="result />
+          )
+          //페이지 이동을 위해 Redirect를 건다. to = '원하는 URL'//
+        }else{
+          alert("관리자가 아닙니다.");
+        }
+    })
+  }
   render() {
     var place = 0;
     return (
@@ -113,11 +118,12 @@ class App extends Component {
               <td align = 'right'><button onClick={this.nextClick}>다음</button></td>
             </tr>
             <tr>
-              <td align = 'left' colSpan = '3'> {this.state.data[this.state.place].description.split('.').map((line) => {
+              <td align = 'left' colSpan = '3'> {this.state.data[this.state.place].description.split(',').join('.').split('.').map((line) => {
             return <div>{line}</div>})}</td>
             </tr>
           </tbody>
         </table>
+        <button onClick={this.check_login}>테스트!!</button>
       </div>
     )
   }
