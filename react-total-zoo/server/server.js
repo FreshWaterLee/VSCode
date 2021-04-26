@@ -19,7 +19,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post("/callbody", (req,res)=>{
+
+//종류별 동물 데이터 리턴 함수
+app.post("/kindtable", (req,res)=>{
     var info=[];
     var kind = req.body.kind;
     var sql = "SELECT name,path,description FROM image where kind = '"+kind+"'";
@@ -36,7 +38,26 @@ app.post("/callbody", (req,res)=>{
         }
     })
 })
-app.post("/Login_check",(req,res)=>{
+
+// 관리자가 보는 테이블 리턴 함수
+app.post("/alltable", (req,res)=>{
+    var info=[];
+    var sql = "SELECT _id,name,kind,path,description FROM image";
+    connection.query(sql,
+    function(err,rows,fields){
+        if(err){
+            console.log("불러오기 실패");
+        }else{
+            for(var i=0; i<rows.length; i++){
+                info.push(rows[i]);
+            }
+            console.log("불러오기 성공",info.length);
+            res.send(info);
+        }
+    })
+})
+
+app.post("/Logincheck",(req,res)=>{
     var id = req.body.id;
     var pw = req.body.pw;
     var sql = "select name from admin where id='"+id+"' and pw='"+pw+"'";
@@ -44,15 +65,19 @@ app.post("/Login_check",(req,res)=>{
         if(err){
             console.log("db 접속 실패!!");
         }else{
-            if(rows.length<1){
-                res.send("None");
+            if(rows.length===0){
+                var name = {name:"None"};
+                console.log("로그인 실패!!");
+                res.send(name);
             }else{
                 var name = rows[0];
+                console.log("로그인 성공");
                 res.send(name);
             }
         }
     })
 })
+
 app.listen(port, ()=>{
     console.log(`Connect at http://localhost:${port}`);
 })

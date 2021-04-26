@@ -6,6 +6,7 @@ function ZooPage(){
     <>
         <Header/>
         <div className='main'>동물 페이지</div>
+        <img src = '/images/Animal/001.jpg'/>
     </>
     ); 
 }
