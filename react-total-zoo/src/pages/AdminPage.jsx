@@ -6,6 +6,9 @@ function AdminPage(){
         <>
         <Header/>
         <div className='main'>관리자 페이지</div>
+        {
+        console.log("ttt")
+        }
         </>
     );
 }

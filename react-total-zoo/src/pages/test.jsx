@@ -60,11 +60,15 @@ const Button = styled.div`
   `}
 `;
 class test extends Component{
-    state ={
-        id:"",
-        pw:"",
-        name:"",
-        btnState:false,
+    constructor(props)
+    {
+        super(props);
+        this.state ={
+                id:"",
+                pw:"",
+                name:"",
+                btnState:false,
+        }
     }
     idChange=(e)=>{
         //id 입력 텍스트에 데이터가 입력되면 id 업데이트//
@@ -79,6 +83,7 @@ class test extends Component{
     }
     check_login=()=>{
         var post = {"id":this.state.id,"pw":document.getElementById('password').value};
+        var result;
         fetch("http://localhost:3001/Logincheck",{
             method:"post",
             headers : {
@@ -89,17 +94,15 @@ class test extends Component{
         )
         .then((json)=>{
             this.setState({
-                name: json,
+                name: json.name,
             })
-            var result =this.state.name.name;
+            console.log("Name is ",this.state.name);
+            var result = this.state.name;
             if(result !=="None")
             {
-                alert("관리자 입니다!!");
+                alert("/test/"+result);
                 window.location.replace("/test/"+result);
-            }
-            else{
-                alert("관리자가 아닙니다!!");
-                window.location.replace("/");
+                // this.props.history.push("/Admin");
             }
         })
     }
