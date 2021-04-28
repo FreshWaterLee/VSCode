@@ -20,6 +20,7 @@ function Header({location, history}) {
                 <button>동물원 입장</button>
                 </Link>
             </li>
+            
         </ul> 
     </header> 
     ); 
