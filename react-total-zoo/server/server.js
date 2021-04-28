@@ -41,16 +41,12 @@ app.post("/kindtable", (req,res)=>{
 
 // 관리자가 보는 테이블 리턴 함수
 app.post("/alltable", (req,res)=>{
-    var info=[];
     var sql = "SELECT _id,name,kind,path,description FROM image";
     connection.query(sql,
     function(err,rows,fields){
         if(err){
             console.log("불러오기 실패");
         }else{
-            // for(var i=0; i<rows.length; i++){
-            //     info.push(rows[i]);
-            // }
             console.log("불러오기 성공");
             res.send(rows);
         }
