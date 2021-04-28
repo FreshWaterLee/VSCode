@@ -48,11 +48,11 @@ app.post("/alltable", (req,res)=>{
         if(err){
             console.log("불러오기 실패");
         }else{
-            for(var i=0; i<rows.length; i++){
-                info.push(rows[i]);
-            }
-            console.log("불러오기 성공",info.length);
-            res.send(info);
+            // for(var i=0; i<rows.length; i++){
+            //     info.push(rows[i]);
+            // }
+            console.log("불러오기 성공");
+            res.send(rows);
         }
     })
 })

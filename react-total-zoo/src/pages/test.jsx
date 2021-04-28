@@ -96,11 +96,9 @@ class test extends Component{
             this.setState({
                 name: json.name,
             })
-            console.log("Name is ",this.state.name);
             var result = this.state.name;
             if(result !=="None")
             {
-                alert("/test/"+result);
                 window.location.replace("/test/"+result);
                 // this.props.history.push("/Admin");
             }
