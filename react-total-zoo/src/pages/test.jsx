@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from '../components/Header'
 import styled from "styled-components";
 import oc from 'open-color';
+import store from '../store';
 
 const Container = styled.div`
   margin-top: 20px;
@@ -67,6 +68,7 @@ class test extends Component{
                 id:"",
                 pw:"",
                 name:"",
+                data:"",
                 btnState:false,
         }
     }
@@ -81,9 +83,25 @@ class test extends Component{
         (this.state.id.length >=5 && this.state.pw.length >=6)? 
         this.setState({btnState:true,}):this.setState({btnState:false,})
     }
+    send_list=()=>{
+        alert("목록?");
+        fetch("http://localhost:3001/alltable",{
+            method:"post",
+            headers : {
+              "content-type" : "application/json",
+            },
+        }).then((res)=>res.json())
+        .then((json)=>{
+            this.setState({
+                data : json.data,
+            })
+        }).then(()=>{
+            store.dispatch({type:"loginS",name : this.state.name, data:this.state.data});
+            this.props.history.push("/red_login");
+        })
+    }
     check_login=()=>{
         var post = {"id":this.state.id,"pw":document.getElementById('password').value};
-        var result;
         fetch("http://localhost:3001/Logincheck",{
             method:"post",
             headers : {
@@ -96,16 +114,19 @@ class test extends Component{
             this.setState({
                 name: json.name,
             })
-            var result = this.state.name;
-            if(result !=="None")
+        }).then(()=>{
+            if(this.state.name !=="None")
             {
-                window.location.replace("/test/"+result);
-                // this.props.history.push("/Admin");
+                alert("로그인 완료!!"+this.state.name);
+                this.send_list();
+            }
+            else{
+                alert("아닌데? 아닌데?"+this.state.name);
             }
         })
     }
     go_main=()=>{
-        window.location.href="/";
+        this.props.history.push("/");
     }
     LoginForm=()=>{
         return(

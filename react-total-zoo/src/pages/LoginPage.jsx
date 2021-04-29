@@ -9,9 +9,9 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 const LoginPage=()=>{
-    const [count, setCount] = useState(0); // useEffect 확인용 useState
+    // const [count, setCount] = useState(0); // useEffect 확인용 useState
     const [animal, setAnimal] = useState([{_id:"1",name:"None",kind:"None",path:"None",description:"None"}]);// 동물 데이터를 state에 저장해놓기 위해 생성
-    const [addbtn, setAdd] = useState(false); // 생물을 추가 했을시 새로고침을 위해 생성
+    // const [addbtn, setAdd] = useState(false); // 생물을 추가 했을시 새로고침을 위해 생성
     const alldata=()=>{
         var customer = [];
         fetch("http://localhost:3001/alltable",{

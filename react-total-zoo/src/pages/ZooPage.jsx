@@ -6,7 +6,7 @@ function ZooPage(){ // 동물 페이지 심플하게 종류 선택 후 관람 �
     <>
         <Header/>
         <div className='main'>동물 페이지</div>
-        <img src = '/images/Animal/001.jpg'/>
+        <img src = "/images/Animal/001.jpg"/>
     </>
     ); 
 }
