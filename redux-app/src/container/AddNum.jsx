@@ -9,7 +9,6 @@ function mapDispatchToProps(dispatch){
     }
 }
 export default connect(null,mapDispatchToProps)(AddNumber);
-
 // import React,{ Component } from "react";
 // export default class extends Component{
 //     render()

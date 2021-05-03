@@ -11,12 +11,22 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core/styles';
-const theme = createMuiTheme({
-  spacing: 8,
-});
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = {  
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
   },
@@ -45,24 +55,13 @@ const styles = {
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-};
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+}));
 
 export default function SignInSide() {
   const classes = useStyles();
+
   return (
-    <Grid container component="main" height="100%">
+    <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -72,9 +71,9 @@ export default function SignInSide() {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
-          </Typography>      
+          </Typography>
           <form className={classes.form} noValidate>
-             <TextField
+            <TextField
               variant="outlined"
               margin="normal"
               required
@@ -120,14 +119,13 @@ export default function SignInSide() {
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-            </Grid> 
+            </Grid>
             <Box mt={5}>
               <Copyright />
             </Box>
           </form>
-
         </div>
       </Grid>
-     </Grid>
+    </Grid>
   );
 }

@@ -1,15 +1,16 @@
 import React from 'react'; 
 import Header from '../components/Header';
+import Footer from '../components/Footer';
+import {useHistory} from 'react-router'
 
 function MainPage({location, history}){
-    console.log(history);
-    console.log(location);
+    const his = useHistory();
     return (
         <>
-        <Header/>
-        <div className='main'>메인 페이지</div>
+        <Header location = {location} history = {history}/>
+        {/* <div className='main'>메인페이지 구성</div> */}
+        <Footer/>
         </>
     );
 }
-
 export default MainPage;

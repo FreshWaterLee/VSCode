@@ -6,6 +6,8 @@ import MainPage from './pages/MainPage';
 // import LoginPage from './pages/LoginPage';
 import testpage from './pages/test';
 import red_login from './pages/login_redux';
+import lclass from './pages/lclass';
+import test from './pages/test copy';
 function App(){
   return (
     <>
@@ -14,9 +16,10 @@ function App(){
           <Route exact path = '/' component={MainPage} />
           <Route path = '/Admin' component={AdminPage} />
           <Route path = '/Zoo' component={ZooPage} />
-          {/* <Route path = '/login/:name' auth component={LoginPage} /> */}
-          <Route path = '/red_login' component={red_login}/>
+          {/* <Route path = '/red_login' component={red_login}/> */}
           <Route path = '/test' component={testpage}/>
+          <Route path = '/test2' component={test}/>
+          <Route path = '/lclass' component={lclass}/>
           <Route render={() => <div className='error'>에러 페이지!!</div>}/>
         </Switch>
       </BrowserRouter>

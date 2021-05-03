@@ -7,12 +7,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import store from '../store';
-
+import Footer from '../components/Footer';
 export default class login_redux extends Component{
-    state = {
-        animal : store.getState().animal,
-        name : store.getState().name,
-    } // 초기값
+    // state = {
+    //     animal : store.getState().animal,
+    //     name : store.getState().name,
+    // } // 초기값
     constructor(props){
         super(props);
         store.subscribe(function(){
@@ -26,7 +26,7 @@ export default class login_redux extends Component{
         var data = JSON.parse(this.state.animal); // JSON 문자열 데이터를 JSON 값으로 변경
     return(
         <>
-        <Header/>
+        <Header location = {this.props}/>
             <div>
                 <Table>
                 <TableHead>
@@ -48,6 +48,7 @@ export default class login_redux extends Component{
                 </TableBody>
                 </Table>
                 </div>
+                <Footer/>
             </>
     )
     }

@@ -8,7 +8,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-const LoginPage=()=>{
+const LoginPage=({location,history})=>{
     // const [count, setCount] = useState(0); // useEffect 확인용 useState
     const [animal, setAnimal] = useState([{_id:"1",name:"None",kind:"None",path:"None",description:"None"}]);// 동물 데이터를 state에 저장해놓기 위해 생성
     // const [addbtn, setAdd] = useState(false); // 생물을 추가 했을시 새로고침을 위해 생성
@@ -31,7 +31,7 @@ const LoginPage=()=>{
     },[]) // ,[조건] 조건에 만족할때 마다 페이지 새로고침, 혹은 한번만 실행하고 싶다면[]을 입력하면 된다.
     return (
     <>
-    <Header/>
+    <Header location = {location} history={history}/>
         <div>
             <Table>
             <TableHead>

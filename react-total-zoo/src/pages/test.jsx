@@ -3,6 +3,8 @@ import Header from '../components/Header'
 import styled from "styled-components";
 import oc from 'open-color';
 import store from '../store';
+import Footer from'../components/Footer';
+
 
 const Container = styled.div`
   margin-top: 20px;
@@ -149,12 +151,13 @@ class test extends Component{
     render(){
         return(
             <>
-            <Header/>
+            <Header history= {this.props.history}/>
             <this.LoginForm/>
             {/* <div>
             <button className={"login_btn " + (this.state.btnChangeColor? 'onColor':'offColor')} type ="button" onClick={this.go_to}>로그인</button>
             <button className={"login_btn " + (this.state.btnChangeColor? 'onColor':'offColor')} type ="button" onClick={this.go_main}>메인으로</button>
             </div> */}
+            <Footer></Footer>
             </>
             );
     }
