@@ -22,7 +22,7 @@ function Header({location, history}) {
             </li>
             <li>
                 <Link to ='/lclass'>
-                <button hidden={history.location.pathname ==='/red_login'?false:true}>동물 추가</button>
+                {/* <button hidden={history.location.pathname ==='/red_login'?false:true}>동물 추가</button> */}
                 </Link>
             </li>
         </ul> 
