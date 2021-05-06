@@ -6,6 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {useHistory} from 'react-router-dom'
 import {shadow, media} from '../libs/styleUtil';
+
 const Positioner = styled.div`
     display: flex;
     flex-direction: column;
@@ -60,9 +61,6 @@ const GradientBorder = styled.div`
     height: 3px;
     background: linear-gradient(to right, ${oc.teal[6]}, ${oc.cyan[5]});
 `;
-
-
-
 
 export default function SimpleMenu({children}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
