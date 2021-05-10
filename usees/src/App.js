@@ -132,7 +132,7 @@ class App extends Component{
     this.intersectionObserver = new IntersectionObserver(enteries=>{
       var ratio = enteries[0].intersectionRatio;
       console.log("ratio = "+ratio);
-      if(ratio>0) this.setState({count:this.state.count+5});
+      if(ratio>0) this.setState({count:this.state.count+6});
     });
     this.intersectionObserver.observe(this.myref.current);
   }
@@ -141,12 +141,14 @@ class App extends Component{
   }
 
   reapeat_logo(){
+    var image = ['/Main/003.jpg','/Main/002.jpg','/Main/001.jpg','/Main/007.jpg','/Main/006.jpg','/Main/004.jpg']
+    var test = ['Welcome To Naju Zoo Park!!','We Have a Various Creatures!!','First Animal!!','Second Bird!!','Third Marine Life','And!! Our Zoo Parks Special Creature PokeMon!!!'];
     var str = [];
     for(var i=0; i<this.state.count; i++){
       str.push(<div key={i}>
-        <img src = {logo} className = "App-logo" alt = "logo"/>
-        <h2>Welcome to React</h2>
-        <iframe width = "452" height="254" title = {i} src = "https://www.youtube.com/embed/Rf"></iframe>
+        {/* <img src = {image[i]} className = "App-logo" alt = "logo"/> */}
+        <h2>{test[i%6]}</h2>
+        <img src = {image[i%6]} width = "1000px" height = "500px"/>
       </div>
       );
     }
