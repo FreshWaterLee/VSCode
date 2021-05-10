@@ -4,9 +4,7 @@ import oc from 'open-color';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import {useHistory} from 'react-router-dom'
 import {shadow, media} from '../libs/styleUtil';
-
 const Positioner = styled.div`
     display: flex;
     flex-direction: column;
@@ -64,21 +62,20 @@ const GradientBorder = styled.div`
 
 export default function SimpleMenu({children}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const his = useHistory();
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget);    
   };
-
   const handleClose = (e) => { //버튼 별 페이지 이동
     var id = e.target.id;
     if(id === 'main'){
-        his.push('/');
+        // match.push('/');
+        document.location.href='/';
     }
     if(id === 'admin'){
-        his.push('/test2');
+        document.location.href='/test2';
     }
     if(id === 'zoo'){
-        his.push('/Zoo');
+        document.location.href='/Zoo';
     }
     setAnchorEl(null);
   };
@@ -102,7 +99,7 @@ export default function SimpleMenu({children}) {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem ><Logo id = 'main' onClick={handleClose}>MainPage</Logo></MenuItem>
+                        <MenuItem ><Logo id = 'main' onClick={handleClose} >MainPage</Logo></MenuItem>
                         <MenuItem ><Logo id = 'admin' onClick={handleClose}>AdminPage</Logo></MenuItem>
                         <MenuItem ><Logo id = 'zoo' onClick={handleClose}>WatchPage</Logo></MenuItem>
                     </Menu>
