@@ -1,131 +1,168 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core/styles';
+// import React from "react";
+
+// const allData = new Array(25).fill(0).map((_val, i) => i + 1);
+// const perPage = 10;
+// const types = {
+//   start: "START",
+//   loaded: "LOADED"
+// };
+
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case types.start:
+//       return { ...state, loading: true };
+//     case types.loaded:
+//       return {
+//         ...state,
+//         loading: false,
+//         data: [...state.data, ...action.newData],
+//         more: action.newData.length === perPage,
+//         after: state.after + action.newData.length
+//       };
+//     default:
+//       throw new Error("Don't understand action");
+//   }
+// };
+
+// const MyContext = React.createContext();
+
+// function MyProvider({ children }) {
+//   const [state, dispatch] = React.useReducer(reducer, {
+//     loading: false,
+//     more: true,
+//     data: [],
+//     after: 0
+//   });
+//   const { loading, data, after, more } = state;
+
+//   const load = () => {
+//     dispatch({ type: types.start });
+
+//     setTimeout(() => {
+//       const newData = allData.slice(after, after + perPage);
+//       dispatch({ type: types.loaded, newData });
+//     }, 300);
+//   };
+
+//   return (
+//     <MyContext.Provider value={{ loading, data, more, load }}>
+//       {children}
+//     </MyContext.Provider>
+//   );
+// }
 
 
-const styles = {  
-  root: {
-    height: '100vh',
-  },
-  image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-};
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function App(){
+//   const {data, loading, more, load} = React.useContext(MyContext);
+//   const loader = React.useRef(load);
+//   const observer =React.useRef(
+//     new IntersectionObserver(entries=>{
+//       const first = entries[0];
+//       if(first.isIntersecting){
+//         loader.current();
+//       }
+//     },{threshold:1})
+//   );
+//   const [element,setElement] = React.useState(null);
 
-export default function SignInSide() {
-  const classes = useStyles();
-  return (
-    <Grid container component="main" height="100%">
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>      
-          <form className={classes.form} noValidate>
-             <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> 
-            <Box mt={5}>
-              <Copyright />
-            </Box>
-          </form>
+//   React.useEffect(()=>{
+//     loader.current = load;
+//   },[load]);
 
+//   React.useEffect(()=>{
+//     const currentElement = element;
+//     const currentObserver = observer.current;
+
+//     if(currentElement){
+//       currentObserver.observe(currentElement);
+//     }
+
+//     return ()=>{
+//       if(currentElement){
+//         currentObserver.unobserve(currentElement);
+//       }
+//     };
+//   },[element]);
+
+//   return(
+//     <div className = "App">
+//       <ul>
+//         {data.map(row =>(
+//           <li key = {row} style={{background:"orange"}}>
+//             {row}
+//           </li>
+//         ))}
+
+//         {loading && <li>Loading...</li>}
+
+//         {!loading && more &&(
+//           <li ref = {setElement} style ={{background : "green"}}>
+//             <button onClick={load}>Load More</button>
+//           </li>
+//         )}
+//       </ul>
+//     </div>
+//     );
+// }
+
+// export default () => {
+//   return (
+//     <MyProvider>
+//       <App />
+//     </MyProvider>
+//   );
+// };
+import React, {Component} from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+class App extends Component{
+  myref;
+  intersectionObserver;
+
+  constructor(){
+    super();
+    this.myref = React.createRef();
+    this.state={
+      count:0
+    }
+  }
+
+  componentDidMount(){
+    this.intersectionObserver = new IntersectionObserver(enteries=>{
+      var ratio = enteries[0].intersectionRatio;
+      console.log("ratio = "+ratio);
+      if(ratio>0) this.setState({count:this.state.count+5});
+    });
+    this.intersectionObserver.observe(this.myref.current);
+  }
+  componentWillUnmount(){
+
+  }
+
+  reapeat_logo(){
+    var str = [];
+    for(var i=0; i<this.state.count; i++){
+      str.push(<div key={i}>
+        <img src = {logo} className = "App-logo" alt = "logo"/>
+        <h2>Welcome to React</h2>
+        <iframe width = "452" height="254" title = {i} src = "https://www.youtube.com/embed/Rf"></iframe>
+      </div>
+      );
+    }
+    return str;
+  }
+  render(){
+    return (
+      <div className = "App">
+        <div className = "App-header">
+          <h2>Gaur Associates</h2>
+          {this.reapeat_logo()}
+          <div ref = {this.myref}></div>
         </div>
-      </Grid>
-     </Grid>
-  );
+      </div>
+    )
+  }
 }
+
+export default App;
