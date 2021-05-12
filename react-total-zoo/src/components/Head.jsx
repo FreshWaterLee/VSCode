@@ -86,7 +86,7 @@ export default function SimpleMenu({children}) {
         <Positioner>
             <WhiteBackground>
                 <HeaderContents>
-                    <Logo>NaJu Zoo Park</Logo>
+                    <Logo>NaZoo Park</Logo>
                     <Spacer/>
                     {children}
                     <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>

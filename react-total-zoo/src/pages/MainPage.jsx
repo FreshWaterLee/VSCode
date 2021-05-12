@@ -29,7 +29,7 @@ class MainPage extends Component{
 
   reapeat_logo(){
     var image = ['/images/Main/003.jpg','/images/Main/002.jpg','/images/Main/001.jpg','/images/Main/007.jpg','/images/Main/006.jpg','/images/Main/004.jpg'];
-    var test = ['Welcome To Naju Zoo Park!!','We Have Various Creatures!!','First Animal!!','Second Bird!!','Third Marine Life!!',' Special Creature PokeMon!!'];
+    var test = ['Welcome To NaZoo Park!!','We Have Various Creatures!!','First Animal!!','Second Bird!!','Third Marine Life!!',' Special Creature PokeMon!!'];
     var str = [];
     for(var i=0; i<this.state.count; i++){
       str.push(<div key={i}>
