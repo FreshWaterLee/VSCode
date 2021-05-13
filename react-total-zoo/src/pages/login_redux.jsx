@@ -28,7 +28,13 @@ export default class login_redux extends Component{
         console.log(this.state.animal[0].name);
         // var data = JSON.parse(this.state.animal); // JSON 문자열 데이터를 JSON 값으로 변경
         var data = this.state.animal; // JSON 문자열 데이터를 JSON 값으로 변경
-        var men = data.filter(function(data){return data.kind ==='Animal'});
+        var kind = 'Animal';
+        var men
+        if(kind !==''){
+        men = data.filter(function(data){return data.kind ===kind});}
+        else{
+            men = data;    
+        }
         console.log(men);
     return(
             <div>
