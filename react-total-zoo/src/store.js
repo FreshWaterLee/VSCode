@@ -9,8 +9,6 @@ export default createStore(function(state,action){
         }
     }
     if(action.type === 'loginS'){
-        // console.log('name'+action.name);
-        // console.log('data'+action.data);
         return({
             name:action.name,
             animal:action.data,

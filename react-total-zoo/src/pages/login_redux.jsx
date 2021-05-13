@@ -1,5 +1,4 @@
 import React,{Component} from 'react'; 
-import Header from '../components/Header';
 import Customer from '../components/Customer';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -7,7 +6,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import store from '../store';
-import Footer from '../components/Footer';
 export default class login_redux extends Component{
     // state = {
     //     animal : store.getState().animal,
@@ -15,6 +13,10 @@ export default class login_redux extends Component{
     // } // 초기값
     constructor(props){
         super(props);
+        this.state = {
+            name : store.getState().name,
+            animal : store.getState().animal,
+        }
         store.subscribe(function(){
             this.setState({
                 name:store.getState().name,
@@ -23,10 +25,12 @@ export default class login_redux extends Component{
     }
     render()
     {
-        var data = JSON.parse(this.state.animal); // JSON 문자열 데이터를 JSON 값으로 변경
+        console.log(this.state.animal[0].name);
+        // var data = JSON.parse(this.state.animal); // JSON 문자열 데이터를 JSON 값으로 변경
+        var data = this.state.animal; // JSON 문자열 데이터를 JSON 값으로 변경
+        var men = data.filter(function(data){return data.kind ==='Animal'});
+        console.log(men);
     return(
-        <>
-        <Header location = {this.props}/>
             <div>
                 <Table>
                 <TableHead>
@@ -48,8 +52,6 @@ export default class login_redux extends Component{
                 </TableBody>
                 </Table>
                 </div>
-                <Footer/>
-            </>
     )
     }
 }
