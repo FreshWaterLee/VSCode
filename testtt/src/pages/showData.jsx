@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import styled from "styled-components";
 import {Motion, spring} from 'react-motion';
-import NavigateBeforeIconRounded from '@material-ui/icons/NavigateBeforeRounded';
-import NavigateNextIconRounded from '@material-ui/icons/NavigateNextRounded';
 import NavigateBeforeIconOutlined from '@material-ui/icons/NavigateBeforeOutlined';
 import NavigateNextIconOutlined from '@material-ui/icons/NavigateNextOutlined';
 import store from '../store'
+import Slide from './Slide';
 function SplitPane(props){
     return(
         <div className = "SplitPane">
@@ -17,6 +17,15 @@ function SplitPane(props){
         </div>
     );
 }
+const Container = styled.div`
+    width: 60%;
+    overflow: hidden; 
+`;
+
+const SliderContainer = styled.div`
+    width:100%;
+    display:flex;
+`;
 const styles = {
   menu: {
     transform: 'translate(0%,0%)',
@@ -59,10 +68,11 @@ function ShowTable() {
   const [height, setHeight] = useState(38); // UseState를 사용해 Function에서 State를 사용하는 효과를 냄
   const [isChange, setChange ] = useState(false);
   const [data, setData] = useState([]);// 모든 동물 데이터를 가지고 있는 변수
-  const [showData,setShow] = useState([{name:'title',kind:'title',path:'/Main/003.jpg',description:"Title",kind:"Title"}]);
+  const [showData,setShow] = useState([{name:'title',path:'/Main/003.jpg',description:"Title",kind:"Title"}]);
   const [befKind, setK] = useState('');
   const [slideL,setSl] = useState(0);
   const [nowS, setNs] = useState(0);
+  const slideRef = useRef(null);
   const animate=()=>{
     var hei = (height ===215 ? 38:215); // 최대 길이 및 하나의 옵션의 길이만큼 띄우는것
     setHeight(hei); //메뉴의 길이를 다시 세팅
@@ -70,7 +80,6 @@ function ShowTable() {
   const clickB = (e)=>{
     const select = document.getElementById(e.target.id);
     const menu = document.getElementById('Select');
-    const image = document.getElementById('img');
     if(e.target.id === "Animal"){
       if(befKind !== e.target.id){
         setK(e.target.id);
@@ -124,6 +133,10 @@ function ShowTable() {
     }
     setNs(0);
   },[befKind]);
+  useEffect(()=>{
+    slideRef.current.style.transition = "all 0.5s ease-in-out";
+    slideRef.current.style.transform = `translateX(-${nowS}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
+  }, [nowS]);
   return (
     <div >
       {/* <img id = 'img' src = '/Main/003.jpg' width ="320px" height="215px" onMouseOver ={ShowArrow}/> */}
@@ -143,14 +156,21 @@ function ShowTable() {
       </Motion>
       }left = {
         <>
-      <img style = {styles.image} id = 'img' src = {showData[nowS].path} width ="320px" height="215px" onMouseOver ={ShowArrow}/>
-      {/* {isChange && <NavigateBeforeIconRounded color='primary' fontSize = 'large' id = 'before' style = {styles.left} onClick = {Arrow}/>}
-      {isChange && <NavigateNextIconRounded color='primary' fontSize = 'large' id = 'next'style = {styles.right} onClick = {Arrow}/>} */}
-      {isChange && <NavigateBeforeIconOutlined color='primary' fontSize = 'large' id = 'before' style = {styles.left} onClick = {Arrow}/>}
-      {isChange && <NavigateNextIconOutlined color='primary' fontSize = 'large' id = 'next'style = {styles.right} onClick = {Arrow}/>}
+      {/* <img style = {styles.image} id = 'img' src = {showData[nowS].path} width ="320px" height="215px" onMouseOver ={ShowArrow}/> */}
+      <Container>
+      <SliderContainer ref ={slideRef}>
+        {showData.map(imagee=>{
+          console.log(imagee);
+          return(
+              <Slide img = {imagee.path} event = {ShowArrow}/>
+          )
+      })}
+      </SliderContainer>
+        {isChange && <NavigateBeforeIconOutlined color='primary' fontSize = 'large' id = 'before' style = {styles.left} onClick = {Arrow}/>}
+        {isChange && <NavigateNextIconOutlined color='primary' fontSize = 'large' id = 'next'style = {styles.right} onClick = {Arrow}/>}
+      </Container>
       </>
       }/>
-      <div>{nowS}</div>
     </div>
   );
 }
