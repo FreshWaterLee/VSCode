@@ -84,7 +84,6 @@ class test extends Component{
         this.setState({btnState:true,}):this.setState({btnState:false,})
     }
     send_list=()=>{
-        alert("목록?");
         fetch("http://localhost:3001/alltable",{
             method:"post",
             headers : {
