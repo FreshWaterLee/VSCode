@@ -21,7 +21,7 @@ class transdata extends Component{
             })
         }).then(()=>{
             store.dispatch({type:"Watching", data:this.state.data});
-            this.props.history.push("/showTable");
+            this.props.history.push("/showTable2");
         })   
     }
     render(){

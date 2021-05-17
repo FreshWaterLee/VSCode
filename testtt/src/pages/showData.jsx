@@ -1,27 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+import './sdataTable.css'
 import styled from "styled-components";
 import {Motion, spring} from 'react-motion';
 import NavigateBeforeIconOutlined from '@material-ui/icons/NavigateBeforeOutlined';
 import NavigateNextIconOutlined from '@material-ui/icons/NavigateNextOutlined';
-import store from '../store'
+import store from '../store';
 import Slide from './Slide';
-function SplitPane(props){
-    return(
-        <div className = "SplitPane">
-            <div className = "SplitPane-left">
-                {props.left}
-            </div>
-            <div className = "SplitPane-right">
-                {props.right}
-            </div>
-        </div>
-    );
-}
 const Container = styled.div`
     width: 60%;
     overflow: hidden; 
 `;
-
 const SliderContainer = styled.div`
     width:100%;
     display:flex;
@@ -134,44 +122,50 @@ function ShowTable() {
     setNs(0);
   },[befKind]);
   useEffect(()=>{
-    slideRef.current.style.transition = "all 0.5s ease-in-out";
+    slideRef.current.style.transition = "all 0.7s ease-in-out";
     slideRef.current.style.transform = `translateX(-${nowS}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
   }, [nowS]);
   return (
-    <div >
-      {/* <img id = 'img' src = '/Main/003.jpg' width ="320px" height="215px" onMouseOver ={ShowArrow}/> */}
-      <SplitPane right={
-      <Motion style = {{height : spring(height)}}> 
-      {/* 길이를 이벤트에 따라 조정하면서 늘었다 줄었다하는 애니메이션을 준다. */}
-        {
-          ({height}) =>
-          <div style = {Object.assign({}, styles.menu,{height})}>
-            <p style={styles.selection} id = 'Select' onClick = {clickC}>종류를 선택하세요~!</p>
-            <p style={styles.selection} id = 'Animal' onClick = {clickB}>동물</p>
-            <p style={styles.selection} id = 'Bird' onClick = {clickB}>새</p>
-            <p style={styles.selection} id = 'Sea' onClick = {clickB}>해양생물</p>
-            <p style={styles.selection} id = 'Poke' onClick = {clickB}>포켓몬</p>
+    <div class = "main-container">
+        <div class = 'tmpe-box bot-three'>
+          <div class = 'border-dee3eb'>{showData[nowS].name}</div>
+          <div class = 'gap-box'></div>
+          <div class = 'border-dee3eb'>
+          <Container>
+          <SliderContainer ref ={slideRef}>
+            {showData.map(imagee=>{
+              return(
+                  <Slide img = {imagee.path} event = {ShowArrow}/>
+              )
+          })}
+          </SliderContainer>
+            {isChange && <NavigateBeforeIconOutlined color='primary' fontSize = 'large' id = 'before' style = {styles.left} onClick = {Arrow}/>}
+            {isChange && <NavigateNextIconOutlined color='primary' fontSize = 'large' id = 'next'style = {styles.right} onClick = {Arrow}/>}
+          </Container>
           </div>
-        }
-      </Motion>
-      }left = {
-        <>
-      {/* <img style = {styles.image} id = 'img' src = {showData[nowS].path} width ="320px" height="215px" onMouseOver ={ShowArrow}/> */}
-      <Container>
-      <SliderContainer ref ={slideRef}>
-        {showData.map(imagee=>{
-          console.log(imagee);
-          return(
-              <Slide img = {imagee.path} event = {ShowArrow}/>
-          )
-      })}
-      </SliderContainer>
-        {isChange && <NavigateBeforeIconOutlined color='primary' fontSize = 'large' id = 'before' style = {styles.left} onClick = {Arrow}/>}
-        {isChange && <NavigateNextIconOutlined color='primary' fontSize = 'large' id = 'next'style = {styles.right} onClick = {Arrow}/>}
-      </Container>
-      </>
-      }/>
-    </div>
+          <div class = 'gap-box'></div>
+          <div class ='border-dee3eb'>{showData[nowS].description}</div>
+        </div>
+        <div calss = 'temp-box box-four'>
+        {/* <img id = 'img' src = '/Main/003.jpg' width ="320px" height="215px" onMouseOver ={ShowArrow}/> */}
+          <div class = 'border-dee3eb'>
+          <Motion style = {{height : spring(height)}}> 
+          {/* 길이를 이벤트에 따라 조정하면서 늘었다 줄었다하는 애니메이션을 준다. */}
+            {
+              ({height}) =>
+              <div style = {Object.assign({}, styles.menu,{height})}>
+                <p style={styles.selection} id = 'Select' onClick = {clickC}>종류를 선택하세요~!</p>
+                <p style={styles.selection} id = 'Animal' onClick = {clickB}>동물</p>
+                <p style={styles.selection} id = 'Bird' onClick = {clickB}>새</p>
+                <p style={styles.selection} id = 'Sea' onClick = {clickB}>해양생물</p>
+                <p style={styles.selection} id = 'Poke' onClick = {clickB}>포켓몬</p>
+              </div>
+            }
+          </Motion>
+          </div>
+        </div>
+      </div>
+      
   );
 }
 
