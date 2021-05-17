@@ -14,5 +14,10 @@ export default createStore(function(state,action){
             animal:action.data,
         })
     }
+    if(action.type === 'Watching'){
+        return({
+            animal:action.data,
+        })
+    }
     return state;
 },window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())

@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './sdataTable.css'
-import '../App.css'
 import styled from "styled-components";
 import {Motion, spring} from 'react-motion';
 import NavigateBeforeIconOutlined from '@material-ui/icons/NavigateBeforeOutlined';
 import NavigateNextIconOutlined from '@material-ui/icons/NavigateNextOutlined';
-import oc from 'open-color';
 import store from '../store';
-const Logo = styled.div`
-    font-size: 3.0rem;
-    letter-spacing: 2px;
-    color: ${oc.teal[7]};
-    font-family: 'Rajdhani';
+const Container = styled.div`
+    width: 60%;
+    overflow: hidden; 
+`;
+const SliderContainer = styled.div`
+    width:100%;
+    display:flex;
 `;
 const styles = {
   menu: {
     transform: 'translate(0%,0%)',
     position:'absolute',
-    top : '30px',
-    left : '75%',
+    top : '0%',
+    left : '80%',
     overflow: 'hidden',
     border: '2px solid #ddd',
     width: 300,
@@ -59,6 +59,7 @@ function ShowTable() {
   const [befKind, setK] = useState('');
   const [slideL,setSl] = useState(0);
   const [nowS, setNs] = useState(0);
+  const slideRef = useRef(null);
   const animate=()=>{
     var hei = (height ===215 ? 38:215); // 최대 길이 및 하나의 옵션의 길이만큼 띄우는것
     setHeight(hei); //메뉴의 길이를 다시 세팅
@@ -119,58 +120,41 @@ function ShowTable() {
     }
     setNs(0);
   },[befKind]);
-  // useEffect(()=>{
-  //   slideRef.current.style.transition = "all 0.7s ease-in-out";
-  //   slideRef.current.style.transform = `translateX(-${nowS}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
-  // }, [nowS]);
+  useEffect(()=>{
+    slideRef.current.style.transition = "all 0.7s ease-in-out";
+    slideRef.current.style.transform = `translateX(-${nowS}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
+  }, [nowS]);
   return (
     <div class = "main-container">
-      <div class = 'temp-box'><Logo>NaZoo Park</Logo>
-        <div class = 'name'><h2>{showData[nowS].name}</h2></div>
-      </div>
-      <div class = 'border-dee3eb'>
-              <Motion style = {{height : spring(height)}}> 
-                {
-                  ({height}) =>
-                  // <div style = {Object.assign({}, styles.menu,{height})}>
-                  <div style = {Object.assign({}, styles.menu,{height})}>
-                    <p style={styles.selection} id = 'Select' onClick = {clickC}>종류를 선택하세요~!</p>
-                    <p style={styles.selection} id = 'Animal' onClick = {clickB}>동물</p>
-                    <p style={styles.selection} id = 'Bird' onClick = {clickB}>새</p>
-                    <p style={styles.selection} id = 'Sea' onClick = {clickB}>해양생물</p>
-                    <p style={styles.selection} id = 'Poke' onClick = {clickB}>포켓몬</p>
-                  </div>
-                }
-              </Motion>
-            </div>
         <div class = 'tmpe-box bot-three'>
+          <div class = 'border-dee3eb'>{showData[nowS].name}</div>
+          <div class = 'gap-box'></div>
           <div class = 'border-dee3eb'>
-          {/* <Container>
-          <SliderContainer ref ={slideRef}> */}
-          <section className = "slider">
+          <Container>
+          <SliderContainer ref ={slideRef}>
             {showData.map((imagee,index)=>{
               return(
                 <div className = {index === nowS ? 'slide active':imagee} key = {index}>
                 {index === nowS && (
-                <img src = {imagee.path} alt = "travel image" className = 'image' onMouseEnter = {ShowArrow}/>)}
+                <img src = {imagee.path} alt = "travel image" className = 'image'/>)}
                 </div>
               )
           })}
-          {/* </SliderContainer> */}
-            {isChange && <NavigateBeforeIconOutlined color='primary' fontSize = 'large' id = 'before'className='left-arrow' onClick = {Arrow}/>}
-            {isChange && <NavigateNextIconOutlined color='primary' fontSize = 'large' id = 'next' className = 'right-arrow' onClick = {Arrow}/>}
-          {/* </Container> */}
-          </section>
+          </SliderContainer>
+            {isChange && <NavigateBeforeIconOutlined color='primary' fontSize = 'large' id = 'before' style = {styles.left} onClick = {Arrow}/>}
+            {isChange && <NavigateNextIconOutlined color='primary' fontSize = 'large' id = 'next'style = {styles.right} onClick = {Arrow}/>}
+          </Container>
           </div>
+          <div class = 'gap-box'></div>
+          <div class ='border-dee3eb'>{showData[nowS].description}</div>
         </div>
         <div calss = 'temp-box box-four'>
         {/* <img id = 'img' src = '/Main/003.jpg' width ="320px" height="215px" onMouseOver ={ShowArrow}/> */}
-          {/* <div class = 'border-dee3eb'>
+          <div class = 'border-dee3eb'>
           <Motion style = {{height : spring(height)}}> 
-          길이를 이벤트에 따라 조정하면서 늘었다 줄었다하는 애니메이션을 준다. 
+          {/* 길이를 이벤트에 따라 조정하면서 늘었다 줄었다하는 애니메이션을 준다. */}
             {
               ({height}) =>
-              // <div style = {Object.assign({}, styles.menu,{height})}>
               <div style = {Object.assign({}, styles.menu,{height})}>
                 <p style={styles.selection} id = 'Select' onClick = {clickC}>종류를 선택하세요~!</p>
                 <p style={styles.selection} id = 'Animal' onClick = {clickB}>동물</p>
@@ -180,10 +164,6 @@ function ShowTable() {
               </div>
             }
           </Motion>
-          </div> */}
-          <div class = 'gap-box'></div>
-          <div class = 'border-dee3eb'>
-            <div class ='description'>{showData[nowS].description}</div>
           </div>
         </div>
       </div>
