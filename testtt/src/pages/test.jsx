@@ -1,6 +1,7 @@
 import React from "react";
-import Slider from "react-slick";
 import "../App.css"
+import Slider from "react-slick";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
  
@@ -16,7 +17,7 @@ class SimpleSlider extends React.Component {
     return (
         <Slider {...settings}>
         <div>
-          <img src = '/images/Animal/001.jpg' style={{alignItems:"center"}}/>
+          <img src = '/images/Animal/001.jpg'/>
         </div>
         <div>
         <img src = '/images/Animal/002.jpg'/>
