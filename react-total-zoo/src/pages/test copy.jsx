@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, createMuiTheme } from '@material-ui/core/styles';
+import "../App.css"
 
 const theme = createMuiTheme({
     spacing: 8,
@@ -61,7 +62,6 @@ class test extends Component{
         })
     }
     send_list=()=>{
-        alert("목록?");
         fetch("http://localhost:3001/alltable",{
             method:"post",
             headers : {
@@ -95,18 +95,26 @@ class test extends Component{
         }).then(()=>{
             if(this.state.name !=="None")
             {
-                alert("로그인 완료!!"+this.state.name);
                 this.send_list();
             }
             else{
-                alert("아닌데? 아닌데?"+this.state.name);
             }
         })
     }
     go_main=()=>{
         this.props.history.push("/");
     }
+    Jasin=()=>{
+        alert("마!! 자신있나!!??");
+    }
     render(){
+        var settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+          };
         const {classes} = this.props;
         return(
             <>
@@ -115,12 +123,10 @@ class test extends Component{
             <Grid item xs={false} sm={4} md={7} className={classes.image} />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <AccountCircleIcon />
-                </Avatar>
                 <Typography component="h1" variant="h5">
-                    Zoo Park Admin
-                </Typography>      
+                    <h2 class = "loginText">NaZoo Park Admin</h2>
+                </Typography>
+                <img class = "loginImage" src = '/images/Jasin/Jasin.jpg' onClick ={this.Jasin} />
                 <form className={classes.form} noValidate>
                     <TextField
                     variant="outlined"

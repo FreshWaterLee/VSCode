@@ -1,6 +1,5 @@
 import React from 'react'; 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'; 
-import AdminPage from './pages/AdminPage'; 
 import gotoZ from './components/gototable';
 import ZooPage from './pages/ZooPage'; 
 import MainPage from './pages/MainPage';
@@ -17,7 +16,6 @@ function App(){
       </div>
         <Switch>
           <Route exact path = '/' component={MainPage} />
-          <Route path = '/Admin' component={AdminPage} />
           <Route path = '/gotoZoo' component = {gotoZ}/>
           <Route path = '/Zoo' component={ZooPage} />
           <Route path = '/red_login' component={red_login}/>

@@ -33,8 +33,8 @@ class MainPage extends Component{
     var str = [];
     for(var i=0; i<this.state.count; i++){
       str.push(<div key={i}>
-        <h2>{test[i%6]}</h2>
-        <img src = {image[i%6]} width = "960" height="480" />
+        <h2 class = 'MainText'>{test[i%6]}</h2>
+        <img class = 'MainImage'src = {image[i%6]} width = "960" height="480" />
         {/* <iframe width = "452" height="254" title = {i} src = "https://www.youtube.com/embed/Rf"></iframe> */}
       </div>
       );

@@ -75,7 +75,7 @@ export default function SimpleMenu({children}) {
         document.location.href='/test2';
     }
     if(id === 'zoo'){
-        document.location.href='/Zoo';
+        document.location.href='/gotoZoo';
     }
     setAnchorEl(null);
   };
@@ -90,6 +90,7 @@ export default function SimpleMenu({children}) {
                     <Spacer/>
                     {children}
                     <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                    {/* <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}> */}
                         <Logo>Open Menu</Logo>
                     </Button>
                     <Menu
