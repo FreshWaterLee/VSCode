@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import SigendInLink from './SignedInLink'
 import SigendOutLink from './SignedOutLink'
-
+import {connect} from 'react-redux'
 
 const Navar =()=>{
     return(
@@ -16,4 +16,10 @@ const Navar =()=>{
     )
 }
 
-export default Navar;
+const mapStateToProps=(state)=>{
+    return(
+        <div></div>
+    )
+}
+
+export default connect(mapStateToProps)(Navar);
