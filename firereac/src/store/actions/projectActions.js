@@ -1,5 +1,5 @@
 export const createProject = (project) =>{
-    return (dispatch,getState, {getFirestore})=>{
+    return (dispatch,getState, {getFirebase,getFirestore})=>{
     //make async call to database
     const firestore = getFirestore();
     firestore.collection('projects').add({// db 이름 .add 함수는 추가하는 함수

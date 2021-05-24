@@ -39,7 +39,7 @@ class CreateProject extends Component{
         );
     }
 }
-const mapDispatchToProps= dispatch =>{
+const mapDispatchToProps= (dispatch) =>{
     return{
         createProject:(project)=>dispatch(createProject(project))
     }

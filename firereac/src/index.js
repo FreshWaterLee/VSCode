@@ -1,3 +1,5 @@
+//react-redux-firebase 2.2.4, react-redux 5.1.1
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -8,14 +10,13 @@ import rootReducer from './store/reducers/rootReducer'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import { reduxFirestore, getFirestore } from 'redux-firestore';
-import { reactReduxFirebase,getFirebase} from 'react-redux-firebase'
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import fbConfig from './config/fbconfig'
 const store = createStore(rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
     reactReduxFirebase(fbConfig), // redux binding for firebase
-    reduxFirestore(fbConfig)
-    
+    reduxFirestore(fbConfig) // redux bindings for firestore
   )
 ); 
 // Firebase에 접근할때 사용하는 함수(getFirestore,getFirebase)를 매개변수로 입력해서 업데이트 혹은 데이터를 불러올때 사용이 가능하게 해주는 코드
@@ -25,7 +26,7 @@ const store = createStore(rootReducer,
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <App />
+        <App />
     </Provider>
   </React.StrictMode>,document.getElementById('root')
 

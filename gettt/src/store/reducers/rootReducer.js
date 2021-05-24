@@ -1,4 +1,4 @@
-import authReducer from './autoReducer'
+import authReducer from './authReducer'
 import projectReducer from './projectReducer'
 import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore';

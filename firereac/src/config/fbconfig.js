@@ -2,9 +2,10 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 
-var Config = {
+var config = {
     apiKey: "AIzaSyBvwksA_mxIgMbk-9WboGFvXXBaQW-mkyY",
     authDomain: "reactstudy-b24bb.firebaseapp.com",
+    databaseURL: "https://reactstudy-b24bb-default-rtdb.firebaseio.com",
     projectId: "reactstudy-b24bb",
     storageBucket: "reactstudy-b24bb.appspot.com",
     messagingSenderId: "396496487716",
@@ -12,8 +13,7 @@ var Config = {
     measurementId: "G-Y1GJH3WFLC"
   };
   // Initialize Firebase
-  firebase.initializeApp(Config);
-  firebase.firestore().settings({timestampsInSnapshots: true});
-  // firebase.analytics();
+firebase.initializeApp(config);
+firebase.firestore().settings({ timestampsInSnapshots: true });
 
-  export default firebase
+export default firebase 
