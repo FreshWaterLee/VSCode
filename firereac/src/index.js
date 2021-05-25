@@ -19,8 +19,10 @@ import fbConfig from './config/fbconfig'
 const store = createStore(rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
-    reactReduxFirebase(fbConfig,{attachAuthIsReady:true}), // redux binding for firebase
-    reduxFirestore(fbConfig) // redux bindings for firestore
+    reduxFirestore(fbConfig), // redux bindings for firestore
+    reactReduxFirebase(fbConfig,{useFirestoreForProfile:true,userProfile:'users',attachAuthIsReady:true}),
+      // userProfile 은 가져올 데이터(임의로 생성한 유저 정보가 있는 데이터)
+     // redux binding for firebase
   )
 );
 

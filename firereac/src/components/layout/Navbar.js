@@ -5,8 +5,8 @@ import {connect} from 'react-redux'
 import SignedInLink from './SignedInLink'
 
 const Navar =(props)=>{
-    const {auth} = props;
-    const links = auth.uid ? <SignedInLink/>: <SigendOutLink/>;
+    const {auth,profile} = props;
+    const links = auth.uid ? <SignedInLink profile = {profile}/>: <SigendOutLink/>;
     return(
         <nav className = "nav-wrapper grey darken-3">
             <div className = "container">
@@ -19,7 +19,8 @@ const Navar =(props)=>{
 
 const mapStateToProps=(state)=>{
     return{
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
     }
 }
 
