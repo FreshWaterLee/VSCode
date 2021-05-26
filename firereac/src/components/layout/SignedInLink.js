@@ -5,6 +5,7 @@ import {signOut} from '../../store/actions/authActions'
 
 const SigendInLink =(props)=>{
     // props.signOut();
+    const {auth,profile} = props;
     console.log("SignInProfile",props);
     return(
         <ul className = "right">
