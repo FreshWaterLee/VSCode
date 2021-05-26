@@ -7,7 +7,6 @@ import moment from 'moment'
 
 const ProjectDetails=(props)=>{
     const {project,auth} = props;
-    // console.log(project.createAt)
     if(!auth.uid) return <Redirect to='/signin' />
     if (project){
         return(
