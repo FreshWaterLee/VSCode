@@ -15,7 +15,6 @@ const Notification=(props)=>{
         </div>
       </div>
     </div>
-    
   )
 }
 
