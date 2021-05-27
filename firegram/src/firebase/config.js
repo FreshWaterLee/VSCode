@@ -1,14 +1,20 @@
+import * as firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/firestore';
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBvwksA_mxIgMbk-9WboGFvXXBaQW-mkyY",
-    authDomain: "reactstudy-b24bb.firebaseapp.com",
-    databaseURL: "https://reactstudy-b24bb-default-rtdb.firebaseio.com",
-    projectId: "reactstudy-b24bb",
-    storageBucket: "reactstudy-b24bb.appspot.com",
-    messagingSenderId: "396496487716",
-    appId: "1:396496487716:web:b5c3249d5ac0fb608d1fb1",
-    measurementId: "G-T8V5B2R9W7"
+    apiKey: "AIzaSyDa5tm7-I6e2DXN9z-p-xuFSIgfQHqgmvM",
+    authDomain: "firegram-36c98.firebaseapp.com",
+    projectId: "firegram-36c98",
+    storageBucket: "firegram-36c98.appspot.com",
+    messagingSenderId: "121845695315",
+    appId: "1:121845695315:web:5aa24d4bd51ef71ac217a6",
+    measurementId: "G-GCQHWVMLEX"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-//   firebase.analytics();
+
+  const projectStorage = firebase.storage();
+  const projectFirestore = firebase.firestore();
+
+  export {projectFirestore,projectStorage};
