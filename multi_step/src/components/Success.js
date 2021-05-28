@@ -3,10 +3,6 @@ import MuithemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar';
 
 export class Success extends Component {
-    continue =e =>{
-        e.preventDefault();
-        this.props.nextStep();
-    }
     render() {
         return (
             <MuithemeProvider>
@@ -19,5 +15,4 @@ export class Success extends Component {
         );
     }
 }
-
 export default Success
