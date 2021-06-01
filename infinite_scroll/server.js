@@ -13,8 +13,10 @@ const unsplash = new Unsplash({
 const app = express();
 
 app.get('/api/photos',(req,res)=>{
-    unsplash.photos.listPhotos(1, 30)
-    .then(toJson).then(json=>res.json(json));
+    unsplash.photos
+    .listPhotos(req.query.start, req.query.count)
+    .then(toJson)
+    .then(json=>res.json(json));
 });
 
 const PORT = process.env.PORT || 5000;
